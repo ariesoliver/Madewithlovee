@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special Flowers for you myloveee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(45deg, #ff6b9d, #c45bdc, #7b68ee, #4facfe);
+        background-size: 400% 400%;
+        animation: gradientShift 12s ease infinite;
+        color: white;
+        overflow-x: hidden;
+        min-height: 100vh;
+        position: relative;
+    }
+
+    /* === FALLING FLOWERS ANIMATION === */
+    .falling-flowers {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .falling-flower {
+        position: absolute;
+        top: -50px;
+        font-size: 2rem;
+        animation: fall linear infinite;
+        opacity: 0.8;
+    }
+
+    @keyframes fall {
+        0% {
+            transform: translateY(-100px) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(110vh) rotate(360deg);
+            opacity: 0.5;
+        }
+    }
+
+    /* === ENVELOPE STYLES === */
+    .envelope-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        animation: fadeInUp 1s ease-out;
+        position: relative;
+        z-index: 10;
+    }
+
+    .envelope {
+        position: relative;
+        width: 90%;
+        max-width: 480px;
+        background: rgba(255, 255, 255, 0.95);
+        color: #333;
+        border-radius: 20px;
+        padding: 40px 30px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 0 50px rgba(255, 107, 157, 0.3);
+        margin-bottom: 30px;
+        overflow: hidden;
+        border: 3px solid #ff6b9d;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .greeting {
+        font-family: 'Dancing Script', cursive;
+        font-size: 2.8rem;
+        color: #ff6b9d;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .message-text {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        text-align: center;
+        color: #555;
+        min-height: 80px;
+        font-style: italic;
+    }
+
+    .heart-divider {
+        text-align: center;
+        font-size: 1.5rem;
+        margin: 15px 0;
+        color: #ff6b9d;
+        animation: heartbeat 1.5s infinite;
+    }
+
+    @keyframes heartbeat {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+    }
+
+    .small-text {
+        text-align: center;
+        font-size: 0.95rem;
+        color: #777;
+        margin-top: 10px;
+    }
+
+    /* === BUTTON === */
+    .bloom-button {
+        background: linear-gradient(45deg, #ff6b9d, #ff8fab);
+        border: none;
+        padding: 18px 40px;
+        font-size: 1.3rem;
+        color: white;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 8px 25px rgba(255, 107, 157, 0.5), 0 0 30px rgba(255, 107, 157, 0.3);
+        transition: all 0.3s ease;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        animation: buttonPulse 1.5s ease-in-out infinite;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .bloom-button:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 35px rgba(255, 107, 157, 0.7), 0 0 40px rgba(255, 107, 157, 0.5);
+    }
+
+    /* === COUNTDOWN DISPLAY === */
+    .countdown {
+        font-size: 4rem;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0 0 20px #fff, 0 0 30px #ff6b9d;
+        margin: 20px 0;
+        animation: zoomInOut 1s ease-in-out;
+        display: none;
+    }
+
+    @keyframes zoomInOut {
+        0% { transform: scale(0.5); opacity: 0; }
+        50% { transform: scale(1.2); opacity: 1; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* === ANIMATIONS === */
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes buttonPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+
+    #typewriter {
+        border-right: 3px solid #ff6b9d;
+        animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+        0%, 100% { border-color: #ff6b9d; }
+        50% { border-color: transparent; }
+    }
+
+    .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background-image: 
+            radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+            radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+            radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+            radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+            radial-gradient(2px 2px at 160px 30px, #fff, transparent);
+        background-repeat: repeat;
+        background-size: 200px 100px;
+        animation: sparkleMove 20s linear infinite;
+        z-index: 0;
+    }
+
+    @keyframes sparkleMove {
+        from { transform: translateY(0px); }
+        to { transform: translateY(-100px); }
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+    /* === ✨ NEW SPARKLE EFFECT WHEN OPENING === */
+    .opening-sparkles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 50;
+        display: none;
+    }
+
+    .opening-sparkle {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background: white;
+        border-radius: 50%;
+        box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.8), 0 0 40px 10px rgba(255, 215, 0, 0.6);
+        animation: openSparkle 1.5s ease-out forwards;
+    }
+
+    @keyframes openSparkle {
+        0% { 
+            transform: scale(0) rotate(0deg); 
+            opacity: 1;
+        }
+        50% { 
+            transform: scale(1.5) rotate(180deg); 
+            opacity: 1;
+        }
+        100% { 
+            transform: scale(0) rotate(360deg); 
+            opacity: 0;
+        }
+    }
+
+    /* === FLOWER ANIMATIONS === */
+    .flower-section {
+        width: 100%;
+        max-width: 800px;
+        animation: fadeInUp 1s ease-out;
+    }
+
+    .flower-container {
+        position: relative;
+        height: 500px;
+        margin: 50px auto;
+    }
+
+    .grass {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 5px;
+    }
+
+    .grass-blade {
+        width: 8px;
+        height: 50px;
+        background: #4CAF50;
+        border-radius: 50% 50% 0 0;
+        transform-origin: bottom center;
+        animation: growGrass 1s ease-out forwards;
+        opacity: 0;
+    }
+
+    @keyframes growGrass {
+        from { transform: scaleY(0); opacity: 1; }
+        to { transform: scaleY(1); opacity: 1; }
+    }
+
+    .stem {
+        position: absolute;
+        bottom: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 12px;
+        height: 0px;
+        background: #388E3C;
+        animation: growStem 2s ease-out forwards;
+    }
+
+    @keyframes growStem {
+        to { height: 300px; }
+    }
+
+    .leaves {
+        position: absolute;
+        bottom: 150px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .leaf {
+        position: absolute;
+        width: 40px;
+        height: 25px;
+        background: #4CAF50;
+        border-radius: 50% 0;
+        opacity: 0;
+        animation: appear 0.5s ease-out forwards;
+    }
+
+    .leaf-left-1 { transform: rotate(-40deg); left: -60px; animation-delay: 1.5s; }
+    .leaf-right-1 { transform: rotate(40deg) scaleX(-1); right: -60px; animation-delay: 1.7s; }
+    .leaf-left-2 { transform: rotate(-30deg); left: -40px; top: 50px; animation-delay: 1.9s; }
+    .leaf-right-2 { transform: rotate(30deg) scaleX(-1); right: -40px; top: 50px; animation-delay: 2.1s; }
+
+    @keyframes appear {
+        to { opacity: 1; }
+    }
+
+    .flower {
+        position: absolute;
+        bottom: 350px;
+        left: 50%;
+        transform: translateX(-50%) scale(0);
+        animation: bloom 1.5s ease-out forwards;
+        animation-delay: 2s;
+    }
+
+    @keyframes bloom {
+        to { transform: translateX(-50%) scale(1); }
+    }
+
+    .petal {
+        position: absolute;
+        width: 60px;
+        height: 100px;
+        background: linear-gradient(45deg, #ff6b9d, #ff8fab);
+        border-radius: 50% 0;
+        transform-origin: bottom center;
+        box-shadow: inset 0 0 10px rgba(255,255,255,0.2);
+    }
+
+    .petal-1 { transform: rotate(0deg); }
+    .petal-2 { transform: rotate(45deg); }
+    .petal-3 { transform: rotate(90deg); }
+    .petal-4 { transform: rotate(135deg); }
+    .petal-5 { transform: rotate(180deg); }
+    .petal-6 { transform: rotate(225deg); }
+    .petal-7 { transform: rotate(270deg); }
+    .petal-8 { transform: rotate(315deg); }
+
+    .flower-center {
+        position: absolute;
+        top: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 40px;
+        background: #FFD700;
+        border-radius: 50%;
+        box-shadow: 0 0 15px #FFD700;
+    }
+
+    .sparkles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .sparkle {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: white;
+        border-radius: 50%;
+        animation: sparkleAnim 1.5s infinite;
+        opacity: 0;
+    }
+
+    @keyframes sparkleAnim {
+        0%, 100% { opacity: 0; transform: scale(0); }
+        50% { opacity: 1; transform: scale(1); }
+    }
+
+    .love-message {
+        animation: fadeInUp 2s ease-out;
+        animation-delay: 3s;
+        opacity: 0;
+        animation-fill-mode: forwards;
+    }
+
+    .back-button {
+        margin-top: 30px;
+        background: white;
+        color: #ff6b9d;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-size: 1rem;
+        cursor: pointer;
+        font-weight: bold;
+        animation: fadeInUp 2s ease-out;
+        animation-delay: 3.5s;
+        opacity: 0;
+        animation-fill-mode: forwards;
+    }
+  </style>
+ </head>
+ <body>
+  <div class="stars"></div>
+  <div class="falling-flowers"></div>
+  
+  <!-- ✨ SPARKLES WHEN OPENING -->
+  <div class="opening-sparkles" id="openingSparkles"></div>
+  
+  <div class="container">
+   <div class="envelope-wrapper" id="introSection">
+     <div class="envelope">
+       <h1 class="greeting">Hello Myloveeee</h1>
+       <p class="message-text" id="typewriter"></p>
+       <div class="heart-divider">💓–</div>
+       <p class="small-text">You're so beautiful myloveee, iloveyouuuusomuchhh</p>
+     </div>
+     <button class="bloom-button" id="bloomButton">
+       <span>Flowers For You myloveee</span>
+     </button>
+   </div>
+
+   <div class="countdown" id="countdown"></div>
+
+   <div class="flower-section hidden" id="flowerSection">
+    <div class="flower-container">
+     <div class="grass">
+      <div class="grass-blade grass-1"></div>
+      <div class="grass-blade grass-2"></div>
+      <div class="grass-blade grass-3"></div>
+      <div class="grass-blade grass-4"></div>
+      <div class="grass-blade grass-5"></div>
+      <div class="grass-blade grass-6"></div>
+      <div class="grass-blade grass-7"></div>
+      <div class="grass-blade grass-8"></div>
+      <div class="grass-blade grass-9"></div>
+      <div class="grass-blade grass-10"></div>
+     </div>
+     <div class="stem"></div>
+     <div class="leaves">
+      <div class="leaf leaf-left-1"></div>
+      <div class="leaf leaf-right-1"></div>
+      <div class="leaf leaf-left-2"></div>
+      <div class="leaf leaf-right-2"></div>
+     </div>
+     <div class="flower">
+      <div class="petal petal-1"></div>
+      <div class="petal petal-2"></div>
+      <div class="petal petal-3"></div>
+      <div class="petal petal-4"></div>
+      <div class="petal petal-5"></div>
+      <div class="petal petal-6"></div>
+      <div class="petal petal-7"></div>
+      <div class="petal petal-8"></div>
+      <div class="flower-center"></div>
+     </div>
+     <div class="sparkles">
+      <div class="sparkle sparkle-1" style="top:20px; left:20px; animation-delay:0.2s"></div>
+      <div class="sparkle sparkle-2" style="top:40px; right:30px; animation-delay:0.5s"></div>
+      <div class="sparkle sparkle-3" style="top:80px; left:50px; animation-delay:0.8s"></div>
+      <div class="sparkle sparkle-4" style="top:10px; right:80px; animation-delay:1s"></div>
+      <div class="sparkle sparkle-5" style="top:120px; left:10px; animation-delay:1.2s"></div>
+      <div class="sparkle sparkle-6" style="top:70px; right:10px; animation-delay:1.5s"></div>
+     </div>
+    </div>
+    <div class="love-message">
+     <h2>• Made With Love</h2>
+     <p>Unta ma okay naka ugma poo, iloveyouuuusomuchhh</p>
+    </div>
+    <button class="back-button" id="backButton">Send to Someone Else 💐</button>
+   </div>
+  </div>
+
+  <script>
+    // === TYPEWRITER EFFECT ===
+    const text = "hi loveee, kabalo ko nga kapoy kaayo ka run ug daghan kaykag problema, pero always remember po nga naa rako ha, ug tanang problema naay solution poo, diman nimo makita solution sa karon pero puhon, lablabb pag need ko nimo naa rako dire pirme poo, maminaw kos imoha bisan unsang orasa, iloveyouuuusomuchhh loveee basta dili kalimtan po ha na lovee kang camanse";
+    let i = 0;
+    const speed = 70; 
+
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("typewriter").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+
+    // === FALLING FLOWERS ===
+    function createFallingFlowers() {
+        const flowersContainer = document.querySelector('.falling-flowers');
+        const flowerEmojis = ['💓', '🫶', '😍', '🥰', '😚', '🤩', '💞'];
+        
+        setInterval(() => {
+            const flower = document.createElement('div');
+            flower.classList.add('falling-flower');
+            flower.innerHTML = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+            
+            const startPosition = Math.random() * 100;
+            const duration = Math.random() * 10 + 10;
+            const size = Math.random() * 1.5 + 1;
+            
+            flower.style.left = startPosition + 'vw';
+            flower.style.animationDuration = duration + 's';
+            flower.style.fontSize = size + 'rem';
+            
+            flowersContainer.appendChild(flower);
+            
+            setTimeout(() => { flower.remove(); }, duration * 1000);
+        }, 800);
+    }
+
+    // === ✨ FUNCTION TO CREATE SPARKLES WHEN OPENING ===
+    function createOpeningSparkles() {
+        const container = document.getElementById('openingSparkles');
+        container.style.display = 'block';
+        container.innerHTML = ''; // clear old ones
+
+        for(let i = 0; i < 50; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('opening-sparkle');
+            
+            const posX = Math.random() * 100;
+            const posY = Math.random() * 100;
+            const delay = Math.random() * 1;
+            
+            sparkle.style.left = posX + 'vw';
+            sparkle.style.top = posY + 'vh';
+            sparkle.style.animationDelay = delay + 's';
+            
+            container.appendChild(sparkle);
+            
+            // Remove after animation
+            setTimeout(() => {
+                sparkle.remove();
+            }, 2000);
+        }
+    }
+
+    // === COUNTDOWN & SHOW FLOWERS ===
+    const bloomButton = document.getElementById('bloomButton');
+    const introSection = document.getElementById('introSection');
+    const flowerSection = document.getElementById('flowerSection');
+    const countdownEl = document.getElementById('countdown');
+
+    bloomButton.addEventListener('click', function() {
+        bloomButton.style.display = 'none';
+        countdownEl.style.display = 'block';
+        
+        let count = 3;
+        
+        const timer = setInterval(() => {
+            countdownEl.innerHTML = count;
+            
+            if(count === 0) {
+                clearInterval(timer);
+                countdownEl.innerHTML = '💖 GO! 💖';
+                
+                setTimeout(() => {
+                    introSection.style.display = 'none';
+                    countdownEl.style.display = 'none';
+                    flowerSection.classList.remove('hidden');
+                    
+                    // ✨ TRIGGER SPARKLE EFFECT HERE
+                    createOpeningSparkles();
+                    
+                    // Restart animations by cloning
+                    const container = document.querySelector('.flower-container');
+                    const newContainer = container.cloneNode(true);
+                    container.parentNode.replaceChild(newContainer, container);
+
+                }, 800);
+            }
+            count--;
+        }, 1000);
+    });
+
+    // === SOUND EFFECT ===
+    function playSound() {
+        try{
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(320, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(190, audioContext.currentTime + 0.1);
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.1);
+        }catch(e){}
+    }
+
+    bloomButton.addEventListener('click', playSound);
+    document.getElementById('backButton').addEventListener('click', playSound);
+
+    // === INITIALIZE ===
+    window.onload = function() {
+        setTimeout(typeWriter, 500);
+        createFallingFlowers();
+    };
+  </script>
+ </body>
+</html>
